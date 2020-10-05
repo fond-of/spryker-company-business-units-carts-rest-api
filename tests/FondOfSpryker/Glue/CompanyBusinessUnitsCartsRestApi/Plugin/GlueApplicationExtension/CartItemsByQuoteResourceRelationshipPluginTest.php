@@ -8,6 +8,7 @@ use FondOfSpryker\Glue\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCart
 use FondOfSpryker\Glue\CompanyBusinessUnitsCartsRestApi\Processor\Expander\CartItemByQuoteResourceRelationshipExpanderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
+use Spryker\Glue\Kernel\AbstractFactory;
 
 class CartItemsByQuoteResourceRelationshipPluginTest extends Unit
 {
@@ -61,8 +62,30 @@ class CartItemsByQuoteResourceRelationshipPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->cartItemsByQuoteResourceRelationshipPlugin = new CartItemsByQuoteResourceRelationshipPlugin();
-        $this->cartItemsByQuoteResourceRelationshipPlugin->setFactory($this->companyBusinessUnitsCartsRestApiFactoryMock);
+        $this->cartItemsByQuoteResourceRelationshipPlugin = new class(
+            $this->companyBusinessUnitsCartsRestApiFactoryMock
+        ) extends CartItemsByQuoteResourceRelationshipPlugin {
+            /**
+             * @var \FondOfSpryker\Glue\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCartsRestApiFactory
+             */
+            protected $companyBusinessUnitsCartsRestApiFactory;
+
+            /**
+             * @param \FondOfSpryker\Glue\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCartsRestApiFactory $companyBusinessUnitsCartsRestApiFactory
+             */
+            public function __construct(
+                CompanyBusinessUnitsCartsRestApiFactory $companyBusinessUnitsCartsRestApiFactory)
+            {
+                $this->companyBusinessUnitsCartsRestApiFactory = $companyBusinessUnitsCartsRestApiFactory;
+            }
+
+            /**
+             * @return \Spryker\Glue\Kernel\AbstractFactory
+             */
+            protected function getFactory(): AbstractFactory {
+                return $this->companyBusinessUnitsCartsRestApiFactory;
+            }
+        };
     }
 
     /**
