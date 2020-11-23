@@ -6,6 +6,9 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 use Spryker\Glue\Kernel\Controller\AbstractController;
 
+/**
+ * @method \FondOfSpryker\Glue\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCartsRestApiFactory getFactory()
+ */
 class CompanyBusinessUnitsCartsResourceController extends AbstractController
 {
     /**

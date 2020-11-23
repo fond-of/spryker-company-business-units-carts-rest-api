@@ -17,11 +17,14 @@ class CompanyBusinessUnitsCartsRestApiRepository extends AbstractRepository impl
      */
     public function getIdQuoteByQuoteUuid(string $quoteUuid): ?int
     {
-        return $this->getFactory()
+        /** @var int|null $idQuote */
+        $idQuote = $this->getFactory()
             ->getQuoteQuery()
             ->clear()
             ->filterByUuid($quoteUuid)
             ->select(SpyQuoteTableMap::COL_ID_QUOTE)
             ->findOne();
+
+        return $idQuote;
     }
 }

@@ -76,7 +76,7 @@ class QuoteReader implements QuoteReaderInterface
     }
 
     /**
-     * @param $restCompanyBusinessUnitCartListTransfer
+     * @param \Generated\Shared\Transfer\RestCompanyBusinessUnitCartListTransfer $restCompanyBusinessUnitCartListTransfer
      *
      * @return int|null
      */
